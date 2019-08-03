@@ -1,0 +1,16 @@
+PODS:
+  - InAppUpdates (0.1.0)
+
+DEPENDENCIES:
+  - InAppUpdates (from `../`)
+
+EXTERNAL SOURCES:
+  InAppUpdates:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  InAppUpdates: ab7528fabddb8359396e02e33e16d90b933623e1
+
+PODFILE CHECKSUM: 9d4f59d0cb741e486b9ad43b7dbb9975c9331ccd
+
+COCOAPODS: 1.7.4

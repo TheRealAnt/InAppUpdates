@@ -22,7 +22,7 @@ pod 'InAppUpdates'
 
 ## Author
 
-antonie, antonie@immedia.co.za
+Antonie Sander, antonies9@hotmail.com
 
 ## License
 

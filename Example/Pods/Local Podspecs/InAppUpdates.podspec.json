@@ -1,0 +1,22 @@
+{
+  "name": "InAppUpdates",
+  "version": "0.1.0",
+  "summary": "A short description of InAppUpdates.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/antonie/InAppUpdates",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "antonie": "antonie@immedia.co.za"
+  },
+  "source": {
+    "git": "https://github.com/antonie/InAppUpdates.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "InAppUpdates/Classes/**/*"
+}
