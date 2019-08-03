@@ -1,0 +1,6 @@
+use_frameworks!
+target 'InAppUpdates_Tests' do
+  pod 'InAppUpdates', :path => '../'
+  
+  
+end
