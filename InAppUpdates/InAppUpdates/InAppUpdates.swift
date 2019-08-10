@@ -1,13 +1,12 @@
 //
 //  InAppUpdates.swift
-//  Reply
+//  InAppUpdates
 //
-//  Created by Antonie on 2019/08/01.
+//  Created by Antonie on 2019/08/10.
 //  Copyright © 2019 antonie. All rights reserved.
 //
 
 import Foundation
-import UIKit
 import SafariServices
 
 // getting data from the url
@@ -19,7 +18,7 @@ struct AppStoreApi: Decodable {
     let results: [Result]
 }
 
-// mapping app details from the AppStore
+// app details from the AppStore
 struct Result: Decodable {
     // release notes
     let releaseNotes: String?
@@ -86,9 +85,10 @@ struct currentAppVersionDetails {
     }
 }
 
-class InAppUpdates {
+public class InAppUpdates{
+    private init() {}
     
-    func accessAppStoreApi() {
+    public func accessAppStoreApi() {
         
         guard let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(currentAppVersionDetails().bundleId)") else { return }
         
@@ -110,19 +110,31 @@ class InAppUpdates {
                 let decodedResponse = try JSONDecoder().decode(AppStoreApi.self, from: data!)
                 if (!decodedResponse.results.isEmpty) {
                     let userAppVersion = currentAppVersionDetails().versionNumber
+                    let userOSVersion = UIDevice.current.systemVersion
+                    print(userOSVersion)
                     let result = decodedResponse.results.first
-                    // compare version numbers
-                    if result?.version!.compare(userAppVersion, options: .numeric) == .orderedDescending {
-                        // show app update alert view controller
-                        DispatchQueue.main.async {
-                            self.showAppUpdateAlert(storeLink: URL(string: (result?.trackViewUrl)!)!, newVersionNumber: String(stringLiteral: (result?.version)!), appName: String(stringLiteral: (result?.trackName)!))
+                    // first check user device iOS version can run the new app version
+                    if (result?.minimumOsVersion?.compare(userOSVersion, options: .numeric) == .orderedAscending || result?.minimumOsVersion?.compare(userOSVersion, options: .numeric) == .orderedSame)
+                    {
+                        // then compare app version numbers
+                        if (result?.version!.compare(userAppVersion, options: .numeric) == .orderedDescending){
+                            // show app update alert view controller
+                            DispatchQueue.main.async {
+                                self.showAppUpdateAlert(storeLink: URL(string: (result?.trackViewUrl)!)!)
+                            }
+                        } else{
+                            //error
+                            print("No results found")
                         }
+                        
                     }
                 } else {
-                    //error
-                    print("No results found")
+                    #if DEBUG
+                    print("iOS version is too low for an update")
+                    #endif
                 }
-            } catch {
+            }
+            catch {
                 print("JSON error: \(error.localizedDescription)")
             }
         }
@@ -130,22 +142,26 @@ class InAppUpdates {
     }
     
     // the app update alert dialog
-    func showAppUpdateAlert(storeLink: URL, newVersionNumber: String, appName: String) {
-        let win = UIWindow(frame: UIScreen.main.bounds)
-        let vc = UIViewController()
-        
-        vc.view.backgroundColor = .clear
-        win.rootViewController = vc
-        win.windowLevel = UIWindowLevelAlert + 1
-        win.makeKeyAndVisible()
-        
-        let alert = UIAlertController(title: "App Update", message: "\n \(appName) v\(newVersionNumber) is now available for download", preferredStyle: UIAlertController.Style.alert)
+    public func showAppUpdateAlert(storeLink: URL) {
+        let appName = currentAppVersionDetails().appName
+        let alert = UIAlertController(title: "App Update", message: "A newer version of \(appName) is available for download.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Download", style: .default){(action:UIAlertAction!) in
             UIApplication.shared.open(URL(string: "\(storeLink)")!)
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        vc.present(alert, animated: true, completion: nil)
+        alert.showOnTop()
     }
 }
 
+public extension UIAlertController {
+    func showOnTop() {
+        let win = UIWindow(frame: UIScreen.main.bounds)
+        let vc = UIViewController()
+        vc.view.backgroundColor = .clear
+        win.rootViewController = vc
+        win.windowLevel = UIWindowLevelAlert + 1
+        win.makeKeyAndVisible()
+        vc.present(self, animated: true, completion: nil)
+    }
+}
