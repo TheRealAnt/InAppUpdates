@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name             = 'InAppUpdates'
-s.version          = '0.1.0'
+s.version          = '0.1.1'
 s.summary          = 'Checks for updated App version on the App Store.'
 s.swift_version    = '4.0'
 s.description      = "Provides an in app update dialog which notifies the user that there is a newer version of the app on the App Store."

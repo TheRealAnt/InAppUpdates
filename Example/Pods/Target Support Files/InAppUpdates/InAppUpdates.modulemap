@@ -1,6 +1,0 @@
-framework module InAppUpdates {
-  umbrella header "InAppUpdates-umbrella.h"
-
-  export *
-  module * { export * }
-}
