@@ -1,22 +1,24 @@
 {
   "name": "InAppUpdates",
   "version": "0.1.0",
-  "summary": "A short description of InAppUpdates.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/antonie/InAppUpdates",
+  "summary": "Checks for updated App version on the App Store.",
+  "swift_versions": "4.0",
+  "description": "Provides an in app update dialog which notifies the user that there is a newer version of the app on the App Store.",
+  "homepage": "https://github.com/TheRealAnt/InAppUpdates",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "antonie": "antonie@immedia.co.za"
+    "Antonie Sander": "antonies9@hotmail.com"
   },
   "source": {
-    "git": "https://github.com/antonie/InAppUpdates.git",
+    "git": "https://github.com/TheRealAnt/InAppUpdates.git",
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "11.0"
   },
-  "source_files": "InAppUpdates/Classes/**/*"
+  "source_files": "InAppUpdates/**/*",
+  "swift_version": "4.0"
 }

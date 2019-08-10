@@ -86,7 +86,7 @@ struct currentAppVersionDetails {
 }
 
 public class InAppUpdates{
-    private init() {}
+    public init() {}
     
     public func accessAppStoreApi() {
         
@@ -154,7 +154,7 @@ public class InAppUpdates{
     }
 }
 
-public extension UIAlertController {
+extension UIAlertController {
     func showOnTop() {
         let win = UIWindow(frame: UIScreen.main.bounds)
         let vc = UIViewController()

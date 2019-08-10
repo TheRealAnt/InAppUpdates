@@ -2,15 +2,15 @@ PODS:
   - InAppUpdates (0.1.0)
 
 DEPENDENCIES:
-  - InAppUpdates (from `../`)
+  - InAppUpdates (from `../InAppUpdates/`)
 
 EXTERNAL SOURCES:
   InAppUpdates:
-    :path: "../"
+    :path: "../InAppUpdates/"
 
 SPEC CHECKSUMS:
-  InAppUpdates: ab7528fabddb8359396e02e33e16d90b933623e1
+  InAppUpdates: 1f0ec1ddeb85fc639ffb87cc02c0cfbaf41f6125
 
-PODFILE CHECKSUM: 9d4f59d0cb741e486b9ad43b7dbb9975c9331ccd
+PODFILE CHECKSUM: 247cb47866394482b29ff4549ea783eab94d836b
 
 COCOAPODS: 1.7.4
